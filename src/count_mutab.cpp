@@ -3,7 +3,7 @@ using namespace Rcpp;
 
 // Function to create a summary table for a data frame
 // [[Rcpp::export]]
-DataFrame create_mr_table(DataFrame df, int countValue) {
+DataFrame create_mr_count_table(DataFrame df, int countValue) {
   // Get the number of rows and columns in the data frame
   int nRows = df.nrow();
   int nCols = df.length();

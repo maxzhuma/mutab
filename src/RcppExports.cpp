@@ -10,19 +10,21 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// rcpp_hello_world
-List rcpp_hello_world();
-RcppExport SEXP _mutab_rcpp_hello_world() {
+// create_mr_count_table
+DataFrame create_mr_count_table(DataFrame df, int countValue);
+RcppExport SEXP _mutab_create_mr_count_table(SEXP dfSEXP, SEXP countValueSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(rcpp_hello_world());
+    Rcpp::traits::input_parameter< DataFrame >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< int >::type countValue(countValueSEXP);
+    rcpp_result_gen = Rcpp::wrap(create_mr_count_table(df, countValue));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_mutab_rcpp_hello_world", (DL_FUNC) &_mutab_rcpp_hello_world, 0},
+    {"_mutab_create_mr_count_table", (DL_FUNC) &_mutab_create_mr_count_table, 2},
     {NULL, NULL, 0}
 };
 

@@ -1,13 +1,36 @@
-library(Rcpp)
-library(haven)
-library(labelled)
-library(dplyr)
-library(purrr)
+#' @rawNamespace useDynLib(mutab, .registration=TRUE)
+#' @rawNamespace exportPattern("^[[:alpha:]]+")
+#' @import Rcpp
+#' @import haven
+#' @import labelled
+#' @import dplyr
+#' @import purrr
 
-sourceCpp("count_mrtab.cpp")
-
-#dat <- read_sav('./data-raw/data_sveta.sav')
-
+#' @name mutab_labelled
+#' 
+#' Frequency table for multi-response set from labelled df
+#' 
+#' Creates a basic frequency table for multi-nominal variable (multiple response
+#' set) from labelled data frame.
+#' 
+#' @param dfLabelled Labelled data frame
+#' @param countValue Numeric. Value to count as valid response.
+#' @param extractLabelPattern Regex pattern string, optional. A pattern to 
+#' extract a substring from variable label, the desired pattern has to be a
+#' within the first regex group "()".
+#' @returns A data frame with frequency table.
+#' @examples
+#' \dontrun{
+#' # Make a frequency table for multinom. Used `dplyr::select()` for subsetting.
+#' 
+#' freq <- mutab_labelled(
+#'   select(df, starts_with("V12_")),        # data frame, with subset of columns selected
+#'   1,                                      # counted value
+#'   extractLabelPattern = "^(.*):.*".       # extract all before first colon as a label
+#' )
+#' 
+#' }
+#' @export
 mutab_labelled <- function(dfLabelled, countValue, extractLabelPattern = NULL) {
   
   input_labels <- var_label(dfLabelled)
@@ -23,7 +46,7 @@ mutab_labelled <- function(dfLabelled, countValue, extractLabelPattern = NULL) {
     }) %>%
     bind_cols()
   
-  freq <- create_mr_table(df, countValue)
+  freq <- create_mr_count_table(df, countValue)
   
   tab_out <- freq %>%
     mutate(labels = input_labels) %>%
@@ -33,11 +56,5 @@ mutab_labelled <- function(dfLabelled, countValue, extractLabelPattern = NULL) {
   
 }
 
-freq2 <- mutab_labelled(select(dat, starts_with('Q4a')), 1,
-                        "^(.*):.*")
-
-dat$status
-
-x <- dat[as.numeric(dat$status)==1,]
 
 
