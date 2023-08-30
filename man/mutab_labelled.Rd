@@ -2,9 +2,9 @@
 % Please edit documentation in R/mutab.R
 \name{mutab_labelled}
 \alias{mutab_labelled}
-\title{Frequency table for multi-response set from labelled df}
+\title{Table for multi-response set from labelled df}
 \usage{
-mutab_labelled(dfLabelled, countValue, extractLabelPattern = NULL)
+mutab_labelled(dfLabelled, countValue, extractLabelPattern = NULL, by = NULL)
 }
 \arguments{
 \item{dfLabelled}{Labelled data frame}
@@ -14,13 +14,15 @@ mutab_labelled(dfLabelled, countValue, extractLabelPattern = NULL)
 \item{extractLabelPattern}{Regex pattern string, optional. A pattern to
 extract a substring from variable label, the desired pattern has to be a
 within the first regex group "()".}
+
+\item{by}{Vector of class `labelled`, containing split variable.}
 }
 \value{
 A data frame with frequency table.
 }
 \description{
-Creates a basic frequency table for multi-nominal variable (multiple response
-set) from labelled data frame.
+Creates either a frequency table or a contingency table for 
+multi-nominal variable (multiple response set) from labelled data frame.
 }
 \examples{
 \dontrun{
