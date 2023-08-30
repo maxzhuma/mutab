@@ -70,7 +70,7 @@ mutab_labelled <-
           labels = input_labels
           ) %>%
         relocate(labels, .after = 1)
-      for(i in seq(3,ncol(y))) {
+      for(i in seq(3,ncol(tab_out)-1)) {
         tab_out[[i]] <- set_label_attribute(tab_out[[i]], val_labels_by[[i-2]])
       }
     }

@@ -1,7 +1,7 @@
 Package: mutab
 Type: Package
 Title: Tables for multinominal variables (multiple-response sets)
-Version: 1.0
+Version: 0.2.0
 Date: 2023-08-19
 Author: Max Zhumenko
 Maintainer: Max Zhumenko <m.zhumenko@email.com>
