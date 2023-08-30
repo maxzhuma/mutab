@@ -10,6 +10,19 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// create_mr_count_crosstable
+DataFrame create_mr_count_crosstable(DataFrame df, int count_value, IntegerVector by);
+RcppExport SEXP _mutab_create_mr_count_crosstable(SEXP dfSEXP, SEXP count_valueSEXP, SEXP bySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< DataFrame >::type df(dfSEXP);
+    Rcpp::traits::input_parameter< int >::type count_value(count_valueSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type by(bySEXP);
+    rcpp_result_gen = Rcpp::wrap(create_mr_count_crosstable(df, count_value, by));
+    return rcpp_result_gen;
+END_RCPP
+}
 // create_mr_count_table
 DataFrame create_mr_count_table(DataFrame df, int countValue);
 RcppExport SEXP _mutab_create_mr_count_table(SEXP dfSEXP, SEXP countValueSEXP) {
@@ -24,6 +37,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_mutab_create_mr_count_crosstable", (DL_FUNC) &_mutab_create_mr_count_crosstable, 3},
     {"_mutab_create_mr_count_table", (DL_FUNC) &_mutab_create_mr_count_table, 2},
     {NULL, NULL, 0}
 };
